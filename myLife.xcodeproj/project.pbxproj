@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E6D4882A2D3229FE0058055F /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = E6D488292D3229FE0058055F /* WrappingHStack */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E6D488072D2E3CAB0058055F /* myLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6D4882A2D3229FE0058055F /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = myLife;
 			packageProductDependencies = (
+				E6D488292D3229FE0058055F /* WrappingHStack */,
 			);
 			productName = myLife;
 			productReference = E6D488072D2E3CAB0058055F /* myLife.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = E6D487FE2D2E3CAA0058055F;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E6D488282D3229FE0058055F /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E6D488082D2E3CAB0058055F /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6D488282D3229FE0058055F /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6D488292D3229FE0058055F /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6D488282D3229FE0058055F /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E6D487FF2D2E3CAA0058055F /* Project object */;
 }
