@@ -11,22 +11,18 @@ struct AddMemoryButtonView: View {
     var body: some View {
         VStack {
             VStack() {
-                HStack {
-                    Spacer()
-                    
-                    Image(systemName: "plus")
-                        .font(.title)
-                        .foregroundColor(Color.white)
-                    
-                    Spacer()
-                }
+                Image(systemName: "plus")
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(
+                        Circle()
+                            .foregroundColor(Color.brand)
+                            .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 5)
+                        
+                    )
             }
-            .padding()
         }
-        .background(
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .foregroundColor(Color.brand)
-        )
     }
 }
 
