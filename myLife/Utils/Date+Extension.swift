@@ -82,7 +82,25 @@ extension Date {
             let newDay = Calendar.current.date(byAdding: .day, value: dayOffset, to: startOfMonth)
             days.append(newDay!)
         }
+        // Add days until the end of the current week
+        var lastDayAdded = days[days.count - 1]
+        let lastDisplayDay = Calendar.current.date(byAdding: .day, value: daysUntilEndOfWeek(from: lastDayAdded), to: lastDayAdded)!
+        while lastDayAdded < lastDisplayDay {
+            lastDayAdded = Calendar.current.date(byAdding: .day, value: 1, to: lastDayAdded)!
+            days.append(lastDayAdded)
+        }
         return days
+    }
+    
+    func daysUntilEndOfWeek(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let weekday = calendar.component(.weekday, from: date)
+        
+        // In the Gregorian calendar, Sunday is 1 and Saturday is 7.
+        // So we calculate how many days are left to reach Sunday.
+        let daysUntilSunday = 7 - weekday
+        
+        return daysUntilSunday
     }
     
     var yearInt: Int {
