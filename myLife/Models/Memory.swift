@@ -7,6 +7,7 @@
 
 import SwiftData
 import Foundation
+import SwiftUI
 
 @Model
 class Memory {
@@ -15,13 +16,23 @@ class Memory {
     var title: String
     var memoryText: String
     var people: [Person] = []
+    var imageData: Data?
     
     // Initializer
-    init(date: Date, title: String, memoryText: String, people: [Person]) {
+    init(date: Date, title: String, memoryText: String, people: [Person], imageData: Data? = nil) {
         self.date = date
         self.title = title
         self.memoryText = memoryText
         self.people = people
+        self.imageData = imageData
+    }
+    
+    func getImage() -> Image? {
+        guard let imageData = imageData,
+              let uiImage = UIImage(data: imageData) else {
+            return nil
+        }
+        return Image(uiImage: uiImage)
     }
     
     static let example = Memory(
@@ -31,3 +42,4 @@ class Memory {
         people: [Person.example]
     )
 }
+
