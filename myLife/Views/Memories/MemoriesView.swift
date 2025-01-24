@@ -15,6 +15,7 @@ struct MemoriesView: View {
     @State private var selectedDate = Date().startOfDay
     @State private var lastDate = Date().startOfDay
     @State private var showCalendar = false
+    @State private var randomMemory: Memory = .example
     
     @Query var allMemories: [Memory]
     @Query var previousMemories: [Memory]
@@ -73,9 +74,7 @@ struct MemoriesView: View {
                             
                             Spacer()
                             
-                            Button {
-                                print("Take them to a random memory detail screen.")
-                            } label: {
+                            NavigationLink(value: allMemories) {
                                 Text("Rememeber")
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 8)
@@ -84,7 +83,6 @@ struct MemoriesView: View {
                                     .cornerRadius(8)
                             }
                         }
-                        
                         
                         ForEach (memories) { memory in
                             NavigationLink(value: memory) {
@@ -119,14 +117,12 @@ struct MemoriesView: View {
             }
             .onAppear() {
                 lastDate = Date().startOfDay
-                if previousMemories.isEmpty {
-                    let newMemory = Memory(date: Date(), title: "Special Memory", memoryText: "This is a special memory. I really enjoyed what happened today. It made me laugh a lot.", people: [])
-                    modelContext.insert(newMemory) // Add the memory to the SwiftData context
-                    try? modelContext.save()
-                }
             }
             .navigationDestination(for: Memory.self) { memory in
                 MemoryDetailView(memory: memory, geometry: geometry)
+            }
+            .navigationDestination(for: [Memory].self) { memories in
+                RandomMemoryDetailView(memories: memories, geometry: geometry)
             }
         }
     }

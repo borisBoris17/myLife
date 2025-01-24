@@ -10,10 +10,20 @@ import SwiftUI
 struct MemoryDetailView: View {
     var memory: Memory
     var geometry: GeometryProxy
+    var updateMemory: () -> Void = { }
     
     var body: some View {
         ScrollView {
+            
+            HStack {
+                Text(memory.title)
+                    .font(.title)
+                    .foregroundStyle(.brand)
+                    .fontWeight(.bold)
+            }
+            
             VStack {
+                
                 if let image = memory.getImage() {
                     image
                         .resizable()
@@ -23,6 +33,10 @@ struct MemoryDetailView: View {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                         )
                         .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .foregroundColor(Color.darkerBackground)
+                        )
                 } else {
                     Image(systemName: "camera")
                         .resizable()
@@ -36,34 +50,33 @@ struct MemoryDetailView: View {
                         )
                 }
             }
-            .frame(width: geometry.size.width, height: geometry.size.width)
-            .background(Color.background)
+            .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.width)
             
             VStack(alignment: .leading) {
-                HStack {
-                    Text(memory.title)
-                        .font(.title)
-                        .foregroundStyle(.brand)
-                    
-                    Spacer()
-                }
                 
                 HStack {
+                    Spacer()
+                    
                     Text(memory.date.formatted(date: .numeric, time: .omitted))
                         .foregroundStyle(.brand.opacity(0.75))
-                    
-                    Spacer()
                 }
-                    
+                
                 Text(memory.memoryText)
                     .foregroundStyle(.brand.opacity(0.75))
                     .padding(.top)
+                
+                Spacer()
             }
             .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .foregroundColor(Color.darkerBackground)
+            )
+            .padding()
             
-            Spacer()
         }
-        .background(Color.darkerBackground)
+        //        .background(Color.darkerBackground)
+        .background(Color.background)
     }
 }
 
