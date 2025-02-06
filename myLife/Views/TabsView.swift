@@ -19,7 +19,7 @@ struct TabsView: View {
                     }
                     .tag(0)
                 
-                MemoriesView(geometry: geometry)
+                GratitudeView(geometry: geometry)
                     .tabItem {
                         Label("Gratitude", systemImage: "sparkles")
                     }

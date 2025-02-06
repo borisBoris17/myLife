@@ -13,7 +13,7 @@ struct myLifeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [Memory.self])
+                .modelContainer(for: [Memory.self, Gratitude.self])
         }
     }
 }
