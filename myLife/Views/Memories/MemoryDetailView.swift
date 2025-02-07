@@ -12,6 +12,8 @@ struct MemoryDetailView: View {
     var geometry: GeometryProxy
     var updateMemory: () -> Void = { }
     
+    @State private var showEditMemoryView = false
+    
     var body: some View {
         ScrollView {
             
@@ -77,6 +79,16 @@ struct MemoryDetailView: View {
         }
         //        .background(Color.darkerBackground)
         .background(Color.background)
+        .toolbar {
+            ToolbarItem {
+                Button("Edit") {
+                    showEditMemoryView.toggle()
+                }
+            }
+        }
+        .sheet(isPresented: $showEditMemoryView) {
+            EditMemoryView(memory: memory)
+        }
     }
 }
 

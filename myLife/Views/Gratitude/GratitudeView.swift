@@ -16,6 +16,7 @@ struct GratitudeView: View {
     @State private var showAddPerson = false
     @State private var selectedPerson: Person = Person.example
     @State private var selectedPeople: Set<Person> = []
+    @State private var showManagePeople = false
     
     @Query var people: [Person]
     @Query var momentsOfGratitude: [Gratitude]
@@ -40,7 +41,9 @@ struct GratitudeView: View {
                         
                         Spacer()
                         
-                        
+                        Button("Manage") {
+                            showManagePeople.toggle()
+                        }
                     }
                     
                     WrappingHStack(alignment: .leading) {
@@ -114,6 +117,9 @@ struct GratitudeView: View {
         }
         .sheet(isPresented: $showAddSheet) {
             AddGratitudeView()
+        }
+        .sheet(isPresented: $showManagePeople) {
+            ManagePeopleView()
         }
         .onAppear() {
             if selectedPeople.isEmpty {
