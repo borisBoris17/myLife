@@ -10,10 +10,20 @@ import SwiftData
 
 @main
 struct myLifeApp: App {
+    var sharedModelContainer: ModelContainer = {
+        let config = ModelConfiguration(cloudKitDatabase: .automatic)
+        
+        do {
+            return try ModelContainer(for: Memory.self, Gratitude.self, Person.self, configurations: config)
+        } catch {
+            fatalError("Failed to create ModelContainer: \(error)")
+        }
+    }()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [Memory.self, Gratitude.self])
+                .modelContainer(sharedModelContainer)
         }
     }
 }

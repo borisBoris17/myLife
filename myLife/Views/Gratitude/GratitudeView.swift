@@ -17,6 +17,8 @@ struct GratitudeView: View {
     @State private var selectedPerson: Person = Person.example
     @State private var selectedPeople: Set<Person> = []
     @State private var showManagePeople = false
+    @State private var showEditMoment = false
+    @State private var momemntToEdit: Gratitude?
     
     @Query var people: [Person]
     @Query var momentsOfGratitude: [Gratitude]
@@ -24,7 +26,7 @@ struct GratitudeView: View {
     private var moments: [Gratitude] {
         guard !selectedPeople.isEmpty else { return [] }
         return momentsOfGratitude.filter { moment in
-            moment.people.contains { selectedPeople.contains($0) }
+            moment.unwrappedPeople.contains { selectedPeople.contains($0) }
         }
     }
     
@@ -92,6 +94,9 @@ struct GratitudeView: View {
                     
                     ForEach(moments) { gratitude in
                         MomentOfGratitudeCardView(gratitude: gratitude)
+                            .onTapGesture {
+                                momemntToEdit = gratitude
+                            }
                     }
                 }
                 .safeAreaInset(edge: .bottom) {
@@ -112,6 +117,11 @@ struct GratitudeView: View {
             .padding()
             .background(Color.background)
         }
+        .onChange(of: momemntToEdit) { _, newValue in
+            if newValue != nil {
+                showEditMoment = true
+            }
+        }
         .sheet(isPresented: $showAddPerson) {
             AddPersonView()
         }
@@ -120,6 +130,9 @@ struct GratitudeView: View {
         }
         .sheet(isPresented: $showManagePeople) {
             ManagePeopleView()
+        }
+        .sheet(isPresented: $showEditMoment) {
+            EditGratitudeView(gratitude: momemntToEdit!)
         }
         .onAppear() {
             if selectedPeople.isEmpty {

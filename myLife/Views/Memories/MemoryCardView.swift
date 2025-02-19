@@ -30,7 +30,7 @@ struct MemoryCardView: View {
                 GeometryReader { geometry in
                     HStack {
                         WrappingHStack(alignment: .leading) {
-                            ForEach (memory.people) { person in
+                            ForEach (memory.unwrappedPeople) { person in
                                 Text(person.name)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 8)

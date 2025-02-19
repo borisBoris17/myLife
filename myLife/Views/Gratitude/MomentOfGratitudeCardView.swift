@@ -20,7 +20,7 @@ struct MomentOfGratitudeCardView: View {
                 GeometryReader { geometry in
                     HStack {
                         WrappingHStack(alignment: .leading) {
-                            ForEach (gratitude.people) { person in
+                            ForEach (gratitude.unwrappedPeople) { person in
                                 Text(person.name)
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 8)

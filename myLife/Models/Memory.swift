@@ -10,13 +10,26 @@ import Foundation
 import SwiftUI
 
 @Model
-class Memory {
-    @Attribute(.unique) var id: UUID = UUID() // Unique identifier for each memory
-    var date: Date
-    var title: String
-    var memoryText: String
-    var people: [Person] = []
+class Memory: Codable {
+    var id: UUID = UUID() // Unique identifier for each memory
+    var date: Date = Date.now
+    var title: String = "Title"
+    var memoryText: String = "Remember this"
+    var people: [Person]? = []
     var imageData: Data?
+    
+    var unwrappedPeople: [Person] {
+        people ?? []
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case date
+        case title
+        case memoryText
+        case people
+        case imageData
+    }
     
     // Initializer
     init(date: Date, title: String, memoryText: String, people: [Person], imageData: Data? = nil) {
@@ -25,6 +38,28 @@ class Memory {
         self.memoryText = memoryText
         self.people = people
         self.imageData = imageData
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        date = try container.decode(Date.self, forKey: .date)
+        title = try container.decode(String.self, forKey: .title)
+        imageData = try container.decodeIfPresent(Data.self, forKey: .imageData) ?? nil
+        memoryText = try container.decode(String.self, forKey: .memoryText)
+        people = try container.decode([Person].self, forKey: .people)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(date, forKey: .date)
+        try container.encode(title, forKey: .title)
+        try container.encode(memoryText, forKey: .memoryText)
+        if let imageData = imageData {
+            try container.encode(imageData, forKey: .imageData)
+        }
+        try container.encode(people, forKey: .people)
     }
     
     func getImage() -> Image? {

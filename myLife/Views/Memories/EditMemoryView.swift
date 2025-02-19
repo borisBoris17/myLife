@@ -138,7 +138,7 @@ struct EditMemoryView: View {
             memoryTitle = memory.title
             memoryText = memory.memoryText
             imageData = memory.imageData ?? Data()
-            selectedPeople = Set(memory.people)
+            selectedPeople = Set(memory.unwrappedPeople)
             updateImage()
         }
         
