@@ -29,8 +29,8 @@ struct MemoryDetailView: View {
                 if let image = memory.getImage() {
                     image
                         .resizable()
-                        .frame(width: geometry.size.width * 0.8)
                         .scaledToFit()
+                        .frame(width: geometry.size.width * 0.8)
                         .clipShape(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                         )
@@ -43,8 +43,8 @@ struct MemoryDetailView: View {
                     Image(systemName: "camera")
                         .resizable()
                         .foregroundStyle(.brand.opacity(0.5))
-                        .frame(width: geometry.size.width * 0.4, height: geometry.size.width * 0.4)
                         .scaledToFit()
+                        .frame(width: geometry.size.width * 0.4, height: geometry.size.width * 0.4)
                         .padding(50)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)

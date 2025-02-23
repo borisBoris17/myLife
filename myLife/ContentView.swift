@@ -30,25 +30,6 @@ struct HeaderView: View {
                     .scaledToFit()
                 
                 Spacer()
-                
-                Button() {
-                    print("push data to iCloud")
-                    forceCloudKitSync(modelContext: modelContext)
-                } label: {
-                    Image(systemName: "icloud.and.arrow.up")
-                        .font(.title)
-                        .foregroundColor(Color.white)
-                }
-                
-                Button() {
-                    print("open settings")
-                } label: {
-                    Image(systemName: "gear")
-                        .font(.title)
-                        .foregroundColor(Color.white)
-                }
-                
-                
             }
             .padding(.horizontal)
         }

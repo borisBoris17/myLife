@@ -28,6 +28,8 @@ struct AddMemoryView: View {
     
     @Query var people: [Person]
     
+    @EnvironmentObject var userVM: UserViewModel
+    
     func updateImage() {
         if let selectedImageData = imageData,
            let uiImage = UIImage(data: selectedImageData) {
@@ -120,6 +122,7 @@ struct AddMemoryView: View {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Save") {
                             saveMemory()
+                            userVM.updateStreak()
                             memoryTitle = ""
                             memoryText = ""
                             memoryDate = Date()

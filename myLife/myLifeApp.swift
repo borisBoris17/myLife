@@ -14,7 +14,7 @@ struct myLifeApp: App {
         let config = ModelConfiguration(cloudKitDatabase: .automatic)
         
         do {
-            return try ModelContainer(for: Memory.self, Gratitude.self, Person.self, configurations: config)
+            return try ModelContainer(for: Memory.self, Gratitude.self, Person.self, User.self, configurations: config)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
@@ -24,6 +24,7 @@ struct myLifeApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(sharedModelContainer)
+                .environmentObject(UserViewModel(context: sharedModelContainer.mainContext))
         }
     }
 }

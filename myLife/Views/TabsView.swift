@@ -24,6 +24,12 @@ struct TabsView: View {
                         Label("Gratitude", systemImage: "sparkles")
                     }
                     .tag(1)
+                
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape")
+                    }
+                    .tag(2)
             }
             .tint(.brand)
         }

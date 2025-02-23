@@ -21,6 +21,7 @@ struct MemoriesView: View {
     @Query var previousMemories: [Memory]
     
     @Environment(\.modelContext) var modelContext
+    @EnvironmentObject var userVM: UserViewModel
     
     private var memories: [Memory] {
         let calendar = Calendar.current
@@ -66,21 +67,31 @@ struct MemoriesView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        HStack {
-                            Text("Memories")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color.brand)
+                        VStack(spacing: 0) {
+                            HStack {
+                                Text("Memories")
+                                    .font(.title)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color.brand)
+                                
+                                Spacer()
+                                
+                                NavigationLink(value: allMemories) {
+                                    Text("Rememeber")
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 8)
+                                        .background(.brand)
+                                        .foregroundColor(.textOnBrand)
+                                        .cornerRadius(8)
+                                }
+                            }
                             
-                            Spacer()
-                            
-                            NavigationLink(value: allMemories) {
-                                Text("Rememeber")
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 8)
-                                    .background(.brand)
-                                    .foregroundColor(.textOnBrand)
-                                    .cornerRadius(8)
+                            HStack {
+                                Text("Streak: \(userVM.user?.streakCount ?? 0)")
+                                //                                .fontWeight(.bold)
+                                    .foregroundColor(Color.brand)
+                                
+                                Spacer()
                             }
                         }
                         
