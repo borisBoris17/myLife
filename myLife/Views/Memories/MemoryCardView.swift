@@ -9,25 +9,26 @@ import SwiftUI
 import WrappingHStack
 
 struct MemoryCardView: View {
+    var geometry: GeometryProxy
+    
     var memory: Memory
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(memory.title)
-                        .font(.headline)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(memory.title)
+                            .font(.headline)
+                            .multilineTextAlignment(.leading)
+                        
+                        Spacer()
+                        
+                        Text(memory.date.formatted(date: .numeric, time: .omitted))
+                    }
                     
-                    Spacer()
+                    Text(memory.memoryText)
+                        .multilineTextAlignment(.leading)
                     
-                    Text(memory.date.formatted(date: .numeric, time: .omitted))
-                }
-                
-                Text(memory.memoryText)
-                    .multilineTextAlignment(.leading)
-                
-                
-                GeometryReader { geometry in
                     HStack {
                         WrappingHStack(alignment: .leading) {
                             ForEach (memory.unwrappedPeople) { person in
@@ -46,18 +47,18 @@ struct MemoryCardView: View {
                         if let imageData = memory.imageData {
                             Image(uiImage: UIImage(data: imageData)!)
                                 .resizable()
-                                .scaledToFit()
                                 .frame(width: geometry.size.width * 0.15, height: geometry.size.width * 0.15)
                                 .clipShape(
                                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 )
+                                .scaledToFit()
                         }
                     }
+                    
+                    
                 }
-                
+                .padding()
             }
-            .padding()
-        }
         .foregroundStyle(Color.textOnBrand)
         .background(
             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -67,5 +68,7 @@ struct MemoryCardView: View {
 }
 
 #Preview {
-    return MemoryCardView(memory: Memory.example)
+    GeometryReader { geometry in
+        return MemoryCardView(geometry: geometry, memory: Memory.example)
+    }
 }

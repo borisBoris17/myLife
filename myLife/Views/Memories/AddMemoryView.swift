@@ -11,6 +11,8 @@ import WrappingHStack
 import _PhotosUI_SwiftUI
 
 struct AddMemoryView: View {
+    @Binding var animateStreak: Bool
+    
     @Environment(\.dismiss) var dismiss // For dismissing the form if presented as a sheet
     @Environment(\.modelContext) var modelContext // Access the SwiftData model context
     
@@ -139,13 +141,20 @@ struct AddMemoryView: View {
     
     // Save the new memory
     private func saveMemory() {
+        
         let newMemory = Memory(date: memoryDate, title: memoryTitle, memoryText: memoryText, people: Array(selectedPeople), imageData: imageData)
         modelContext.insert(newMemory) // Insert into SwiftData model context
         try? modelContext.save() // Save changes
+        animateStreak = true
+        
+        // Reset animation after short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            animateStreak = false
+        }
     }
 }
 
 #Preview {
-    AddMemoryView()
+    AddMemoryView(animateStreak: .constant(false))
         .modelContainer(for: [Memory.self], inMemory: true) // Add an in-memory container for preview
 }

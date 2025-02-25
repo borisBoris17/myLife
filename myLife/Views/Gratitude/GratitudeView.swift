@@ -131,7 +131,7 @@ struct GratitudeView: View {
         .sheet(isPresented: $showManagePeople) {
             ManagePeopleView()
         }
-        .sheet(isPresented: $showEditMoment) {
+        .sheet(isPresented: $showEditMoment, onDismiss: { momemntToEdit = nil }) {
             EditGratitudeView(gratitude: momemntToEdit!)
         }
         .onAppear() {

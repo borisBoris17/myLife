@@ -16,6 +16,7 @@ struct MemoriesView: View {
     @State private var lastDate = Date().startOfDay
     @State private var showCalendar = false
     @State private var randomMemory: Memory = .example
+    @State private var animateStreak = false
     
     @Query var allMemories: [Memory]
     @Query var previousMemories: [Memory]
@@ -86,18 +87,23 @@ struct MemoriesView: View {
                                 }
                             }
                             
-                            HStack {
-                                Text("Streak: \(userVM.user?.streakCount ?? 0)")
-                                //                                .fontWeight(.bold)
-                                    .foregroundColor(Color.brand)
-                                
-                                Spacer()
+                            if (userVM.user?.streakCount ?? 0 > 0) {
+                                HStack {
+                                    Text("Streak: \(userVM.user?.streakCount ?? 0) \(userVM.user?.streakCount ?? 0 > 1 ? "days" : "day")")
+                                        .foregroundColor(Color.brand)
+                                        .fontWeight(animateStreak ? .bold : .regular)
+                                        .scaleEffect(animateStreak ? 1.3 : 1.0)  // Scale effect
+                                        .opacity(animateStreak ? 0.7 : 1.0)      // Opacity change
+                                        .animation(.easeInOut(duration: 0.5), value: animateStreak)
+                                    
+                                    Spacer()
+                                }
                             }
                         }
                         
                         ForEach (memories) { memory in
                             NavigationLink(value: memory) {
-                                MemoryCardView(memory: memory)
+                                MemoryCardView(geometry: geometry, memory: memory)
                             }
                         }
                         
@@ -124,7 +130,7 @@ struct MemoriesView: View {
             .padding(.top, 5)
             .background(Color.background)
             .sheet(isPresented: $showAddSheet) {
-                AddMemoryView()
+                AddMemoryView(animateStreak: $animateStreak)
             }
             .onAppear() {
                 lastDate = Date().startOfDay

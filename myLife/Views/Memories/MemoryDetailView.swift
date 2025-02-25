@@ -12,7 +12,17 @@ struct MemoryDetailView: View {
     var geometry: GeometryProxy
     var updateMemory: () -> Void = { }
     
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
+    
     @State private var showEditMemoryView = false
+    @State private var showDeleteConfirmation: Bool = false
+    
+    func deleteMemory(memory: Memory) {
+        modelContext.delete(memory)
+        
+        try? modelContext.save()
+    }
     
     var body: some View {
         ScrollView {
@@ -76,6 +86,20 @@ struct MemoryDetailView: View {
             )
             .padding()
             
+            HStack {
+                Spacer()
+                
+                Button("Delete", role: .destructive) {
+                    showDeleteConfirmation = true
+                }
+                .alert(isPresented: $showDeleteConfirmation) {
+                    Alert(title: Text("Delete Memory"), message: Text("Are you sure you want to delete this memory?"), primaryButton: .destructive(Text("Delete")) {
+                        deleteMemory(memory: memory)
+                        dismiss()
+                    }, secondaryButton: .cancel())
+                }
+            }
+            .padding(.horizontal)
         }
         //        .background(Color.darkerBackground)
         .background(Color.background)
