@@ -17,6 +17,7 @@ class Memory: Codable {
     var memoryText: String = "Remember this"
     var people: [Person]? = []
     var imageData: Data?
+    var mood: MoodOption? = nil
     
     var unwrappedPeople: [Person] {
         people ?? []
@@ -29,15 +30,17 @@ class Memory: Codable {
         case memoryText
         case people
         case imageData
+        case mood
     }
     
     // Initializer
-    init(date: Date, title: String, memoryText: String, people: [Person], imageData: Data? = nil) {
+    init(date: Date, title: String, memoryText: String, people: [Person], imageData: Data? = nil, mood: MoodOption? = nil) {
         self.date = date
         self.title = title
         self.memoryText = memoryText
         self.people = people
         self.imageData = imageData
+        self.mood = mood
     }
     
     required init(from decoder: Decoder) throws {
@@ -48,6 +51,7 @@ class Memory: Codable {
         imageData = try container.decodeIfPresent(Data.self, forKey: .imageData) ?? nil
         memoryText = try container.decode(String.self, forKey: .memoryText)
         people = try container.decode([Person].self, forKey: .people)
+        mood = try container.decodeIfPresent(MoodOption.self, forKey: .mood) ?? nil
     }
     
     func encode(to encoder: Encoder) throws {
@@ -60,6 +64,7 @@ class Memory: Codable {
             try container.encode(imageData, forKey: .imageData)
         }
         try container.encode(people, forKey: .people)
+        try container.encode(mood, forKey: .mood)
     }
     
     func getImage() -> Image? {

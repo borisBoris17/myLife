@@ -27,6 +27,7 @@ struct AddMemoryView: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var imageData: Data?
     @State private var image: Image?
+    @State private var selectedMood: MoodOption? = nil
     
     @Query var people: [Person]
     
@@ -99,6 +100,32 @@ struct AddMemoryView: View {
                         }
                     }
                     
+                    Section(header: Text("Mood")) {
+                        HStack {
+                            ForEach(MoodOption.allCases.indices, id: \.self) { index in
+                                Button() {
+                                    if selectedMood == MoodOption.allCases[index] {
+                                        selectedMood = nil
+                                    } else {
+                                        selectedMood = MoodOption.allCases[index]
+                                    }
+                                } label: {
+                                    Text(MoodOption.allCases[index].rawValue)
+                                        .font(.title)
+                                        .padding(8)
+                                        .background(selectedMood == MoodOption.allCases[index] ? Color.brand : Color.clear)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .buttonStyle(BorderlessButtonStyle())
+                                
+                                if index < MoodOption.allCases.count - 1 {
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                    
                     Section(header: Text("Memory")) {
                         TextEditor(text: $memoryText)
                             .frame(minHeight: 100) // Give the editor enough space
@@ -142,7 +169,7 @@ struct AddMemoryView: View {
     // Save the new memory
     private func saveMemory() {
         
-        let newMemory = Memory(date: memoryDate, title: memoryTitle, memoryText: memoryText, people: Array(selectedPeople), imageData: imageData)
+        let newMemory = Memory(date: memoryDate, title: memoryTitle, memoryText: memoryText, people: Array(selectedPeople), imageData: imageData, mood: selectedMood)
         modelContext.insert(newMemory) // Insert into SwiftData model context
         try? modelContext.save() // Save changes
         animateStreak = true

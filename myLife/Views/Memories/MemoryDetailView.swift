@@ -67,6 +67,9 @@ struct MemoryDetailView: View {
             VStack(alignment: .leading) {
                 
                 HStack {
+                    Text(memory.mood?.rawValue ?? "")
+                        .font(.title3)
+                    
                     Spacer()
                     
                     Text(memory.date.formatted(date: .numeric, time: .omitted))
