@@ -44,20 +44,7 @@ struct DayPickerView: View {
                     let day = calendar.date(byAdding: .day, value: -number, to: lastDay)
                     let displayDay = calendar.component(.day, from: day ?? Date())
                     
-                    Button {
-                        selectedDay = day!
-                    } label: {
-                        Text("\(displayDay)")
-                            .font(.headline)
-                            .foregroundColor(day == selectedDay ? .white : Color.brand)
-                            .frame(width: circleSize, height: circleSize)
-                            .background(day == selectedDay ? Color.brand : .clear)
-                            .overlay(
-                                Circle()
-                                    .strokeBorder(Color.brand, lineWidth: 2)
-                            )
-                            .clipShape(Circle())
-                    }
+                    PickerDayView(selectedDay: $selectedDay, circleSize: circleSize, day: day, displayDay: displayDay)
                 }
             }
             .frame(width: geometry.size.width, alignment: .center)

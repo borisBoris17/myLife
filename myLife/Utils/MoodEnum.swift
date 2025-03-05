@@ -14,7 +14,18 @@ enum MoodOption: String, CaseIterable, Codable {
     case melancholic = "😢"
     case heartwarming = "🥰"
     case surprised = "😲"
-
+    
+    var name: String {
+        switch self {
+        case .joyful: return "Joyful"
+        case .funny: return "Funny"
+        case .peaceful: return "Peaceful"
+        case .melancholic: return "Melancholic"
+        case .heartwarming: return "Heartwarming"
+        case .surprised: return "Surprised"
+        }
+    }
+    
     var emoji: String {
         return self.rawValue
     }

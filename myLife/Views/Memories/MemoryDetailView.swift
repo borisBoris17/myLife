@@ -67,8 +67,11 @@ struct MemoryDetailView: View {
             VStack(alignment: .leading) {
                 
                 HStack {
-                    Text(memory.mood?.rawValue ?? "")
-                        .font(.title3)
+                    if let mood = memory.mood {
+                        Text("\(mood.rawValue) \(mood.name)")
+                            .foregroundStyle(.brand.opacity(0.75))
+                            .font(.title3)
+                    }
                     
                     Spacer()
                     

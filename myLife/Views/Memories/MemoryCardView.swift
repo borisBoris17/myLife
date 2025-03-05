@@ -44,8 +44,8 @@ struct MemoryCardView: View {
                         Spacer()
                         
                         
-                        if let imageData = memory.imageData {
-                            Image(uiImage: UIImage(data: imageData)!)
+                        if let imageData = memory.imageData, let uiImage = UIImage(data: imageData) {
+                            Image(uiImage: uiImage)
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.15, height: geometry.size.width * 0.15)
                                 .clipShape(
