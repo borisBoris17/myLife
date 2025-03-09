@@ -131,15 +131,14 @@ struct EditMemoryView: View {
                     }
                 }
             }
-        }
-        .onAppear() {
-            // set state vars from the memory passed in
-            memoryDate = memory.date
-            memoryTitle = memory.title
-            memoryText = memory.memoryText
-            imageData = memory.imageData ?? Data()
-            selectedPeople = Set(memory.unwrappedPeople)
-            updateImage()
+            .onAppear() {
+                memoryDate = memory.date
+                memoryTitle = memory.title
+                memoryText = memory.memoryText
+                imageData = memory.imageData ?? Data()
+                selectedPeople = Set(memory.unwrappedPeople)
+                updateImage()
+            }
         }
         
     }
