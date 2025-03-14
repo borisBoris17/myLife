@@ -99,26 +99,40 @@ struct AddMemoryView: View {
                     }
                     
                     Section(header: Text("Mood")) {
-                        HStack {
-                            ForEach(MoodOption.allCases.indices, id: \.self) { index in
-                                Button() {
-                                    if selectedMood == MoodOption.allCases[index] {
-                                        selectedMood = nil
-                                    } else {
-                                        selectedMood = MoodOption.allCases[index]
-                                    }
-                                } label: {
-                                    Text(MoodOption.allCases[index].rawValue)
-                                        .font(.title)
-                                        .padding(8)
-                                        .background(selectedMood == MoodOption.allCases[index] ? Color.brand : Color.clear)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(8)
+                        VStack {
+                            HStack {
+                                ZStack {
+                                    Text(selectedMood?.name ?? "")
+                                        .font(.headline)
+                                        
+                                    Text("Spacer Text").font(.headline).opacity(0)
                                 }
-                                .buttonStyle(BorderlessButtonStyle())
                                 
-                                if index < MoodOption.allCases.count - 1 {
-                                    Spacer()
+                                Spacer()
+                            }
+                                
+                            
+                            HStack {
+                                ForEach(MoodOption.allCases.indices, id: \.self) { index in
+                                    Button() {
+                                        if selectedMood == MoodOption.allCases[index] {
+                                            selectedMood = nil
+                                        } else {
+                                            selectedMood = MoodOption.allCases[index]
+                                        }
+                                    } label: {
+                                        Text(MoodOption.allCases[index].rawValue)
+                                            .font(.title)
+                                            .padding(8)
+                                            .background(selectedMood == MoodOption.allCases[index] ? Color.brand : Color.clear)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(8)
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
+                                    
+                                    if index < MoodOption.allCases.count - 1 {
+                                        Spacer()
+                                    }
                                 }
                             }
                         }

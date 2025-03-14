@@ -20,6 +20,7 @@ struct EditMemoryView: View {
     @State private var memoryDate: Date = Date() // Default to the current date
     @State private var memoryTitle: String = ""
     @State private var memoryText: String = ""
+    @State private var memoryMood: MoodOption? = nil
     @State private var isDatePickerExpanded: Bool = false
     @State private var isSelected = false
     @State private var showAddPerson = false
@@ -97,6 +98,46 @@ struct EditMemoryView: View {
                         }
                     }
                     
+                    Section(header: Text("Mood")) {
+                        VStack {
+                            HStack {
+                                ZStack {
+                                    Text(memoryMood?.name ?? "")
+                                        .font(.headline)
+                                        
+                                    Text("Spacer Text").font(.headline).opacity(0)
+                                }
+                                
+                                Spacer()
+                            }
+                                
+                            
+                            HStack {
+                                ForEach(MoodOption.allCases.indices, id: \.self) { index in
+                                    Button() {
+                                        if memoryMood == MoodOption.allCases[index] {
+                                            memoryMood = nil
+                                        } else {
+                                            memoryMood = MoodOption.allCases[index]
+                                        }
+                                    } label: {
+                                        Text(MoodOption.allCases[index].rawValue)
+                                            .font(.title)
+                                            .padding(8)
+                                            .background(memoryMood == MoodOption.allCases[index] ? Color.brand : Color.clear)
+                                            .foregroundColor(.white)
+                                            .cornerRadius(8)
+                                    }
+                                    .buttonStyle(BorderlessButtonStyle())
+                                    
+                                    if index < MoodOption.allCases.count - 1 {
+                                        Spacer()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     Section(header: Text("Memory")) {
                         TextEditor(text: $memoryText)
                             .frame(minHeight: 100) // Give the editor enough space
@@ -134,6 +175,7 @@ struct EditMemoryView: View {
             .onAppear() {
                 memoryDate = memory.date
                 memoryTitle = memory.title
+                memoryMood = memory.mood
                 memoryText = memory.memoryText
                 imageData = memory.imageData ?? Data()
                 selectedPeople = Set(memory.unwrappedPeople)
@@ -146,6 +188,7 @@ struct EditMemoryView: View {
     private func saveMemory() {
         memory.date = memoryDate
         memory.title = memoryTitle
+        memory.mood = memoryMood
         memory.memoryText = memoryText
         memory.people = Array(selectedPeople)
         memory.imageData = imageData
