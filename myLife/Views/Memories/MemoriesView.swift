@@ -17,12 +17,11 @@ struct MemoriesView: View {
     @State private var showCalendar = false
     @State private var randomMemory: Memory = .example
     @State private var animateStreak = false
+    @State private var streakMsg = ""
     
     @Query var allMemories: [Memory]
-    @Query var previousMemories: [Memory]
     
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var userVM: UserViewModel
     
     private var memories: [Memory] {
         let calendar = Calendar.current
@@ -42,10 +41,33 @@ struct MemoriesView: View {
             let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
             return startOfDay..<endOfDay
         }
-        _previousMemories = Query(
-            filter: #Predicate<Memory> { memory in
-                memory.date < todayRange.lowerBound
-            })
+    }
+    
+    func calculateStreak() -> Int {
+        var streakCount = 0
+        if allMemories.count > 0 {
+            let sortedMemories = allMemories
+                .sorted(by: { $0.date > $1.date })
+            
+            if sortedMemories.first!.date.isTodayOrYesterday {
+                var dateInStreak = sortedMemories.first!.date
+                streakCount += 1
+                for memory in sortedMemories {
+                    if Calendar.current.isDate(memory.date, inSameDayAs: dateInStreak) {
+                        continue // Skip if it's the same day as the current streak date
+                    }
+                    
+                    if let previousDay = Calendar.current.date(byAdding: .day, value: -1, to: dateInStreak),
+                       Calendar.current.isDate(memory.date, inSameDayAs: previousDay) {
+                        streakCount += 1 // Increment streak if it's the day before the current streak date
+                        dateInStreak = memory.date // Update the streak date
+                    } else {
+                        break // Break the loop if the streak is broken
+                    }
+                }
+            }
+        }
+        return streakCount
     }
     
     var body: some View {
@@ -87,17 +109,15 @@ struct MemoriesView: View {
                                 }
                             }
                             
-                            if (userVM.user?.streakCount ?? 0 > 0) {
-                                HStack {
-                                    Text("Streak: \(userVM.user?.streakCount ?? 0) \(userVM.user?.streakCount ?? 0 > 1 ? "days" : "day")")
-                                        .foregroundColor(Color.brand)
-                                        .fontWeight(animateStreak ? .bold : .regular)
-                                        .scaleEffect(animateStreak ? 1.3 : 1.0)  // Scale effect
-                                        .opacity(animateStreak ? 0.7 : 1.0)      // Opacity change
-                                        .animation(.easeInOut(duration: 0.5), value: animateStreak)
-                                    
-                                    Spacer()
-                                }
+                            HStack {
+                                Text(streakMsg)
+                                    .foregroundColor(Color.brand)
+                                    .fontWeight(animateStreak ? .bold : .regular)
+                                    .scaleEffect(animateStreak ? 1.3 : 1.0)  // Scale effect
+                                    .opacity(animateStreak ? 0.7 : 1.0)      // Opacity change
+                                    .animation(.easeInOut(duration: 0.5), value: animateStreak)
+                                
+                                Spacer()
                             }
                         }
                         
@@ -132,8 +152,17 @@ struct MemoriesView: View {
             .sheet(isPresented: $showAddSheet) {
                 AddMemoryView(animateStreak: $animateStreak)
             }
+            .onChange(of: animateStreak) { _, newValue in
+                if newValue {
+                    let count = calculateStreak()
+                    streakMsg = "Streak: \(count) day\(count == 1 ? "" : "s")"
+                }
+            }
             .onAppear() {
                 lastDate = Date().startOfDay
+                
+                let count = calculateStreak()
+                streakMsg = "Streak: \(count) day\(count == 1 ? "" : "s")"
             }
             .navigationDestination(for: Memory.self) { memory in
                 MemoryDetailView(memory: memory, geometry: geometry)

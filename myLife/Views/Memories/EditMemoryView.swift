@@ -140,7 +140,6 @@ struct EditMemoryView: View {
                 updateImage()
             }
         }
-        
     }
     
     // Save the new memory
@@ -150,7 +149,6 @@ struct EditMemoryView: View {
         memory.memoryText = memoryText
         memory.people = Array(selectedPeople)
         memory.imageData = imageData
-    
         try? modelContext.save() // Save changes
     }
 }

@@ -49,6 +49,10 @@ extension Date {
         return dayInPreviousMonth.startOfMonth
     }
     
+    var isTodayOrYesterday: Bool {
+        Calendar.current.isDateInToday(self) || Calendar.current.isDateInYesterday(self)
+    }
+    
     var startOfNextMonth: Date {
         let dayInNextMonth = Calendar.current.date(byAdding: .month, value: 1, to: self)!
         return dayInNextMonth.startOfMonth

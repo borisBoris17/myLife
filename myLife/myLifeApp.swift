@@ -24,7 +24,6 @@ struct myLifeApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(sharedModelContainer)
-                .environmentObject(UserViewModel(context: sharedModelContainer.mainContext))
         }
     }
 }
