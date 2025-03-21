@@ -8,6 +8,7 @@
 import SwiftData
 import Foundation
 import SwiftUI
+import AppIntents
 
 @Model
 class Memory: Codable {
@@ -41,6 +42,15 @@ class Memory: Codable {
         self.people = people
         self.imageData = imageData
         self.mood = mood
+    }
+    
+    init(title: String) {
+        self.title = title
+        self.date = Date.now
+        self.memoryText = ""
+        self.people = []
+        self.imageData = nil
+        self.mood = nil
     }
     
     required init(from decoder: Decoder) throws {
