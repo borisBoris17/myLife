@@ -87,7 +87,7 @@ class Memory: Codable {
     
     static let example = Memory(
         date: Date(),
-        title: "Memory Title",
+        title: "Memory Title Test",
         memoryText: "This is a memory I have had. It was so nice and it makes me appreciate the life I have and the people in my Life.",
         people: [Person.example]
     )

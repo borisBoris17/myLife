@@ -7,14 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E647DC252D8FC2E9005971ED /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E647DC242D8FC2E9005971ED /* WidgetKit.framework */; };
+		E647DC272D8FC2E9005971ED /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E647DC262D8FC2E9005971ED /* SwiftUI.framework */; };
+		E647DC382D8FC2EB005971ED /* MyLifeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E647DC222D8FC2E9005971ED /* MyLifeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6D4882A2D3229FE0058055F /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = E6D488292D3229FE0058055F /* WrappingHStack */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E647DC362D8FC2EB005971ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6D487FF2D2E3CAA0058055F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E647DC212D8FC2E8005971ED;
+			remoteInfo = MyLifeWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E647DC3D2D8FC2EB005971ED /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E647DC382D8FC2EB005971ED /* MyLifeWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E647DC222D8FC2E9005971ED /* MyLifeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyLifeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E647DC242D8FC2E9005971ED /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E647DC262D8FC2E9005971ED /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		E647DC642D926550005971ED /* MyLifeWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyLifeWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
 		E6D488072D2E3CAB0058055F /* myLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E647DC3C2D8FC2EB005971ED /* Exceptions for "MyLifeWidget" folder in "MyLifeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+		};
+		E647DC4A2D8FC790005971ED /* Exceptions for "Intents" folder in "MyLifeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				MemoryEntity.swift,
+				PeopleEntity.swift,
+				QuickMemoryAddIntent.swift,
+				RandomMemoryIntent.swift,
+			);
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+		};
+		E647DC542D8FC96F005971ED /* Exceptions for "Utils" folder in "MyLifeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Date+Extension.swift",
+				MoodEnum.swift,
+			);
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+		};
+		E647DC602D8FC991005971ED /* Exceptions for "Models" folder in "MyLifeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Gratitude.swift,
+				Memory.swift,
+				Person.swift,
+				User.swift,
+			);
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+		};
 		E67722892D62FE8900B966B7 /* Exceptions for "myLife" folder in "myLife" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -25,6 +91,38 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E647DC282D8FC2E9005971ED /* MyLifeWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E647DC3C2D8FC2EB005971ED /* Exceptions for "MyLifeWidget" folder in "MyLifeWidgetExtension" target */,
+			);
+			path = MyLifeWidget;
+			sourceTree = "<group>";
+		};
+		E647DC442D8FC733005971ED /* Intents */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E647DC4A2D8FC790005971ED /* Exceptions for "Intents" folder in "MyLifeWidgetExtension" target */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		E647DC502D8FC969005971ED /* Utils */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E647DC542D8FC96F005971ED /* Exceptions for "Utils" folder in "MyLifeWidgetExtension" target */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E647DC5A2D8FC989005971ED /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E647DC602D8FC991005971ED /* Exceptions for "Models" folder in "MyLifeWidgetExtension" target */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E6D488092D2E3CAB0058055F /* myLife */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -36,6 +134,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E647DC1F2D8FC2E8005971ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E647DC272D8FC2E9005971ED /* SwiftUI.framework in Frameworks */,
+				E647DC252D8FC2E9005971ED /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6D488042D2E3CAB0058055F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,10 +154,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E647DC232D8FC2E9005971ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E647DC242D8FC2E9005971ED /* WidgetKit.framework */,
+				E647DC262D8FC2E9005971ED /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E647DC3F2D8FC71D005971ED /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E647DC5A2D8FC989005971ED /* Models */,
+				E647DC502D8FC969005971ED /* Utils */,
+				E647DC442D8FC733005971ED /* Intents */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		E6D487FE2D2E3CAA0058055F = {
 			isa = PBXGroup;
 			children = (
+				E647DC642D926550005971ED /* MyLifeWidgetExtensionRelease.entitlements */,
+				E647DC3F2D8FC71D005971ED /* Common */,
 				E6D488092D2E3CAB0058055F /* myLife */,
+				E647DC282D8FC2E9005971ED /* MyLifeWidget */,
+				E647DC232D8FC2E9005971ED /* Frameworks */,
 				E6D488082D2E3CAB0058055F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				E6D488072D2E3CAB0058055F /* myLife.app */,
+				E647DC222D8FC2E9005971ED /* MyLifeWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +197,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E647DC392D8FC2EB005971ED /* Build configuration list for PBXNativeTarget "MyLifeWidgetExtension" */;
+			buildPhases = (
+				E647DC1E2D8FC2E8005971ED /* Sources */,
+				E647DC1F2D8FC2E8005971ED /* Frameworks */,
+				E647DC202D8FC2E8005971ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E647DC282D8FC2E9005971ED /* MyLifeWidget */,
+			);
+			name = MyLifeWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = MyLifeWidgetExtension;
+			productReference = E647DC222D8FC2E9005971ED /* MyLifeWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E6D488062D2E3CAB0058055F /* myLife */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6D488152D2E3CAD0058055F /* Build configuration list for PBXNativeTarget "myLife" */;
@@ -73,12 +226,17 @@
 				E6D488032D2E3CAB0058055F /* Sources */,
 				E6D488042D2E3CAB0058055F /* Frameworks */,
 				E6D488052D2E3CAB0058055F /* Resources */,
+				E647DC3D2D8FC2EB005971ED /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E647DC372D8FC2EB005971ED /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				E647DC442D8FC733005971ED /* Intents */,
+				E647DC502D8FC969005971ED /* Utils */,
+				E647DC5A2D8FC989005971ED /* Models */,
 				E6D488092D2E3CAB0058055F /* myLife */,
 			);
 			name = myLife;
@@ -99,6 +257,9 @@
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					E647DC212D8FC2E8005971ED = {
+						CreatedOnToolsVersion = 16.1;
+					};
 					E6D488062D2E3CAB0058055F = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -122,11 +283,19 @@
 			projectRoot = "";
 			targets = (
 				E6D488062D2E3CAB0058055F /* myLife */,
+				E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E647DC202D8FC2E8005971ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6D488052D2E3CAB0058055F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +306,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E647DC1E2D8FC2E8005971ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6D488032D2E3CAB0058055F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,7 +322,70 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E647DC372D8FC2EB005971ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+			targetProxy = E647DC362D8FC2EB005971ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		E647DC3A2D8FC2EB005971ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YB46Q2GKPA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyLifeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyLifeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tucker-dev.myLife.MyLifeWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E647DC3B2D8FC2EB005971ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyLifeWidgetExtensionRelease.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YB46Q2GKPA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyLifeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyLifeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tucker-dev.myLife.MyLifeWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E6D488132D2E3CAD0058055F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -331,6 +570,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E647DC392D8FC2EB005971ED /* Build configuration list for PBXNativeTarget "MyLifeWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E647DC3A2D8FC2EB005971ED /* Debug */,
+				E647DC3B2D8FC2EB005971ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E6D488022D2E3CAA0058055F /* Build configuration list for PBXProject "myLife" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct HeaderView: View {
     
@@ -43,7 +44,15 @@ struct ContentView: View {
         VStack(spacing: 0) {
             HeaderView()
             
+            Button("Reload Widget") {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+            
             TabsView()
+        }
+        .onAppear() {
+            print("abcdefg")
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }

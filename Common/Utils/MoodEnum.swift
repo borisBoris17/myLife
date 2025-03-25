@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MoodOption: String, CaseIterable, Codable {
+public enum MoodOption: String, CaseIterable, Codable {
     case joyful = "😃"
     case funny = "😂"
     case peaceful = "☺️"
