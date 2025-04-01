@@ -42,52 +42,6 @@ public struct RandomMemoryIntent: AppIntent, WidgetConfigurationIntent {
             print("❌ Failed to read memories from file: \(error)")
             return .result(value: MemoryEntity.placeholder)
         }
-        
-        
-//                print("in RandomMemoryIntent")
-//        
-//                let sharedURL = FileManager.default
-//                    .containerURL(forSecurityApplicationGroupIdentifier: "group.com.tuckerbichsel.myLife")!
-//                    .appendingPathComponent("MyLife.sqlite")
-//        
-//                let config = ModelConfiguration(
-//                    schema: Schema([Memory.self]),
-//                    url: sharedURL,
-//                    cloudKitDatabase: .automatic
-//                )
-//        
-//                let container = try ModelContainer(for: Memory.self, configurations: config)
-//                let context = container.mainContext
-//        
-//                let fetchDescriptor = FetchDescriptor<Memory>()
-//                let memories = try context.fetch(fetchDescriptor)
-//        
-//                print("memories count: ", memories.count)
-//        
-//                guard let randomMemory = memories.randomElement() else {
-//                    let entity = MemoryEntity(
-//                        id: Memory.example.id,
-//                        date: Memory.example.date,
-//                        title: "Memory.example.title",
-//                        memoryText: Memory.example.memoryText,
-//                        people: [],
-//                        imageData: Memory.example.imageData
-//                    )
-//        
-//                    return .result(value: entity)
-//                }
-//        
-//                let entity = MemoryEntity(
-//                    id: randomMemory.id,
-//                    date: randomMemory.date,
-//                    title: randomMemory.title,
-//                    memoryText: randomMemory.memoryText,
-//                    people: [],
-//                    imageData: randomMemory.imageData
-//                )
-//        
-//                print(entity)
-//                return .result(value: entity)
     }
     
     public init() {}

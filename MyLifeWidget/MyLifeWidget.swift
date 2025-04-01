@@ -46,68 +46,61 @@ struct MemoryWidgetEntryView: View {
     var entry: MemoryEntry
     
     var body: some View {
-        ZStack {
-//            LinearGradient(
-//                gradient: Gradient(colors: [.blue, .purple]),
-//                startPoint: .topLeading,
-//                endPoint: .bottomTrailing
-//            )
-//            .ignoresSafeArea()
+        
+        Link(destination: URL(string: "myLife://detail?id=\(entry.memory.id)")!) {
             
-            Link(destination: URL(string: "myLife://detail?id=\(entry.memory.id)")!) {
+            
+            HStack(spacing: 4) {
                 
-                
-                HStack(spacing: 4) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(entry.memory.title)
+                        .font(.headline)
+                        .lineLimit(1)
+                        .foregroundStyle(Color.textOnBrand)
+                        .fontWeight(.bold)
                     
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(entry.memory.title)
-                            .font(.headline)
-                            .lineLimit(1)
-                            .foregroundStyle(Color.textOnBrand)
-                            .fontWeight(.bold)
-                        
-                        Text(entry.memory.memoryText)
+                    Text(entry.memory.memoryText)
+                        .font(.caption)
+                        .lineLimit(4)
+                        .foregroundStyle(Color.textOnBrand)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        Text(entry.memory.date.formatted(date: .abbreviated, time: .omitted))
                             .font(.caption)
-                            .lineLimit(4)
-                            .foregroundStyle(Color.textOnBrand)
+                            .foregroundColor(Color.textOnBrand.opacity(0.5))
                         
                         Spacer()
                         
-                        HStack {
-                            Text(entry.memory.date.formatted(date: .abbreviated, time: .omitted))
-                                .font(.caption)
-                                .foregroundColor(Color.textOnBrand.opacity(0.5))
-                            
-                            Spacer()
-                            
-                            Image("myLifeWhiteLogo")
-                                .resizable()
-                                .frame(width: 50, height: 25)
-                                .scaledToFit()
-                        }
+                        Image("myLifeWhiteLogo")
+                            .resizable()
+                            .frame(width: 50, height: 25)
+                            .scaledToFit()
                     }
-                    
-                    Spacer()
                 }
-                .padding(5)
+                
+                Spacer()
             }
-            .widgetURL(URL(string: "myLife://detail?id=\(entry.memory.id)")!)
-            .containerBackground(for: .widget) {
-//                LinearGradient(
-//                    gradient: Gradient(stops: [
-//                        .init(color: .brand, location: 0.0),
-//                        .init(color: .brand, location: 0.75), // stays blue until 75%
-//                        .init(color: .black, location: 1.0) // then fades to purple
-//                    ]),
-//                    startPoint: .topLeading,
-//                    endPoint: .bottomTrailing
-//                )
-                LinearGradient(
-                    gradient: Gradient(colors: [.brand, .black]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            }
+            .padding(5)
+        }
+        .widgetURL(URL(string: "myLife://detail?id=\(entry.memory.id)")!)
+        .containerBackground(for: .widget) {
+                            LinearGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: .brand, location: 0.0),
+                                    .init(color: .brand, location: 0.4), // stays blue until 75%
+                                    .init(color: .brand.opacity(0.5), location: 0.7),
+                                    .init(color: .black, location: 1.0) // then fades to purple
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+//            LinearGradient(
+//                gradient: Gradient(colors: [.brand, .black]),
+//                startPoint: .topLeading,
+//                endPoint: .bottomTrailing
+//            )
         }
     }
 }
