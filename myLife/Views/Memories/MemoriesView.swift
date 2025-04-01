@@ -18,6 +18,8 @@ struct MemoriesView: View {
     @State private var randomMemory: Memory = .example
     @State private var animateStreak = false
     @State private var streakMsg = ""
+    @State private var lastViewedMemory: String = ""
+    @State private var path = NavigationPath()
     
     @Query var allMemories: [Memory]
     
@@ -71,7 +73,7 @@ struct MemoriesView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack {
                 DayPickerView(geometry: geometry, lastDay: lastDate, selectedDay: $selectedDate, showCalendar: $showCalendar)
                 
@@ -158,6 +160,30 @@ struct MemoriesView: View {
                     streakMsg = "Streak: \(count) day\(count == 1 ? "" : "s")"
                 }
             }
+            .onOpenURL { url in
+                // Parse and handle the URL
+                if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                   components.host == "detail",
+                   let id = components.queryItems?.first(where: { $0.name == "id" })?.value {
+                    
+                    lastViewedMemory = id
+                    
+                    do {
+                        let uuid = UUID(uuidString: id) ?? UUID()
+                        var descriptor = FetchDescriptor<Memory>(
+                            predicate: #Predicate { $0.id == uuid }
+                        )
+                        descriptor.fetchLimit = 1
+                        
+                        let results = try modelContext.fetch(descriptor)
+                        randomMemory = results.first ?? Memory.example
+                        path = NavigationPath()
+                        path.append(randomMemory)
+                    } catch {
+                        print("Error fetching memory from widget. \(error)")
+                    }
+                }
+            }
             .onAppear() {
                 lastDate = Date().startOfDay
                 
@@ -170,6 +196,12 @@ struct MemoriesView: View {
             .navigationDestination(for: [Memory].self) { memories in
                 RandomMemoryDetailView(memories: memories, geometry: geometry)
             }
+        }
+        .onAppear() {
+            if allMemories.count > 0 {
+                MemoryExporter.exportIfNeeded(context: modelContext)
+            }
+            
         }
     }
 }

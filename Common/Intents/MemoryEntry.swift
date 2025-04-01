@@ -22,7 +22,7 @@ extension MemoryEntity {
             title: "Sample Memory",
             memoryText: "A nice memory worth remembering.",
             people: [],
-            imageData: nil
+            mood: nil as MoodOption?
         )
     }
 }

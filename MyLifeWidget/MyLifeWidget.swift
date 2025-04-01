@@ -39,55 +39,32 @@ struct RandomMemoryProvider: AppIntentTimelineProvider {
             let entry = MemoryEntry(date: Date(), memory: MemoryEntity.placeholder)
             return Timeline(entries: [entry], policy: .atEnd)
         }
-        
-//        print("🚨 Timeline called directly without intent")
-//
-//            let entry = MemoryEntry(date: Date(), memory: MemoryEntity.placeholder)
-//            return Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(10)))
     }
 }
-
-struct MemoryEntry: TimelineEntry {
-    let date: Date
-    let memory: MemoryEntity
-}
-
-extension MemoryEntity {
-    static var placeholder: MemoryEntity {
-        MemoryEntity(
-            id: UUID(),
-            date: Date(),
-            title: "Sample Memory",
-            memoryText: "A nice memory worth remembering.",
-            people: [],
-            imageData: nil as Data?,
-            mood: nil as MoodOption?
-        )
-    }
-}
-
 
 struct MemoryWidgetEntryView: View {
     var entry: MemoryEntry
     
     var body: some View {
         HStack(spacing: 12) {
-            if let data = entry.memory.imageData, let uiImage = UIImage(data: data) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 50, height: 50)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-            }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.memory.title)
                     .font(.headline)
                     .lineLimit(1)
                 
+                Text(entry.memory.memoryText)
+                    .font(.caption)
+                    .lineLimit(4)
+                
                 Text(entry.memory.date.formatted(date: .abbreviated, time: .omitted))
                     .font(.caption)
                     .foregroundColor(.secondary)
+                
+                Link(destination: URL(string: "myLife://detail?id=\(entry.memory.id)")!) {
+                    Text("Open in App")
+                }
+                .widgetURL(URL(string: "myLife://detail?id=\(entry.memory.id)")!)
             }
             
             Spacer()

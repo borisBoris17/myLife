@@ -11,12 +11,25 @@ import SwiftData
 @main
 struct myLifeApp: App {
     var sharedModelContainer: ModelContainer = {
-        let config = ModelConfiguration(cloudKitDatabase: .automatic)
+        guard let sharedURL = FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: "group.com.tuckerbichsel.myLife")?
+            .appendingPathComponent("MyLife.sqlite") else {
+            fatalError("Failed to find shared app group container.")
+        }
+        
+        let config = ModelConfiguration(
+//            schema: Schema([Memory.self, Gratitude.self, Person.self, User.self]),
+//            url: sharedURL,
+            cloudKitDatabase: .automatic
+        )
         
         do {
-            return try ModelContainer(for: Memory.self, Gratitude.self, Person.self, User.self, configurations: config)
+            return try ModelContainer(
+                for: Memory.self, Gratitude.self, Person.self, User.self,
+                configurations: config
+            )
         } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
+            fatalError("❌ Failed to create shared ModelContainer: \(error)")
         }
     }()
     

@@ -44,10 +44,6 @@ struct ContentView: View {
         VStack(spacing: 0) {
             HeaderView()
             
-            Button("Reload Widget") {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-            
             TabsView()
         }
         .onAppear() {
