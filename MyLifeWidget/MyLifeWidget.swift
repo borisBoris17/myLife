@@ -46,44 +46,82 @@ struct MemoryWidgetEntryView: View {
     var entry: MemoryEntry
     
     var body: some View {
-        HStack(spacing: 12) {
+        ZStack {
+//            LinearGradient(
+//                gradient: Gradient(colors: [.blue, .purple]),
+//                startPoint: .topLeading,
+//                endPoint: .bottomTrailing
+//            )
+//            .ignoresSafeArea()
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(entry.memory.title)
-                    .font(.headline)
-                    .lineLimit(1)
+            Link(destination: URL(string: "myLife://detail?id=\(entry.memory.id)")!) {
                 
-                Text(entry.memory.memoryText)
-                    .font(.caption)
-                    .lineLimit(4)
                 
-                Text(entry.memory.date.formatted(date: .abbreviated, time: .omitted))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                Link(destination: URL(string: "myLife://detail?id=\(entry.memory.id)")!) {
-                    Text("Open in App")
+                HStack(spacing: 4) {
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(entry.memory.title)
+                            .font(.headline)
+                            .lineLimit(1)
+                            .foregroundStyle(Color.textOnBrand)
+                            .fontWeight(.bold)
+                        
+                        Text(entry.memory.memoryText)
+                            .font(.caption)
+                            .lineLimit(4)
+                            .foregroundStyle(Color.textOnBrand)
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Text(entry.memory.date.formatted(date: .abbreviated, time: .omitted))
+                                .font(.caption)
+                                .foregroundColor(Color.textOnBrand.opacity(0.5))
+                            
+                            Spacer()
+                            
+                            Image("myLifeWhiteLogo")
+                                .resizable()
+                                .frame(width: 50, height: 25)
+                                .scaledToFit()
+                        }
+                    }
+                    
+                    Spacer()
                 }
-                .widgetURL(URL(string: "myLife://detail?id=\(entry.memory.id)")!)
+                .padding(5)
             }
-            
-            Spacer()
+            .widgetURL(URL(string: "myLife://detail?id=\(entry.memory.id)")!)
+            .containerBackground(for: .widget) {
+//                LinearGradient(
+//                    gradient: Gradient(stops: [
+//                        .init(color: .brand, location: 0.0),
+//                        .init(color: .brand, location: 0.75), // stays blue until 75%
+//                        .init(color: .black, location: 1.0) // then fades to purple
+//                    ]),
+//                    startPoint: .topLeading,
+//                    endPoint: .bottomTrailing
+//                )
+                LinearGradient(
+                    gradient: Gradient(colors: [.brand, .black]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            }
         }
-        .padding()
-        .containerBackground(.background, for: .widget)
     }
 }
 
 struct MyLifeWidget: Widget {
     var body: some WidgetConfiguration {
         AppIntentConfiguration(kind: "MyLifeWidget",
-                            intent: RandomMemoryIntent.self,
-                            provider: RandomMemoryProvider()) { entry in
+                               intent: RandomMemoryIntent.self,
+                               provider: RandomMemoryProvider()) { entry in
             MemoryWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Random Memory")
-        .description("Shows a random memory from your journal.")
-        .supportedFamilies([.systemMedium]) // 4x1 is systemMedium
+                               .configurationDisplayName("Random Memory")
+                               .description("Shows a random memory from your journal.")
+                               .supportedFamilies([.systemMedium]) // 4x1 is systemMedium
     }
 }
 

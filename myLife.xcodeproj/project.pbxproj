@@ -92,6 +92,13 @@
 			);
 			target = E6D488062D2E3CAB0058055F /* myLife */;
 		};
+		E6C87AAB2D9BA59E0073DFD5 /* Exceptions for "myLife" folder in "MyLifeWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+			);
+			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -131,6 +138,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E67722892D62FE8900B966B7 /* Exceptions for "myLife" folder in "myLife" target */,
+				E6C87AAB2D9BA59E0073DFD5 /* Exceptions for "myLife" folder in "MyLifeWidgetExtension" target */,
 			);
 			path = myLife;
 			sourceTree = "<group>";
