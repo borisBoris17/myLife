@@ -96,11 +96,6 @@ struct MemoryWidgetEntryView: View {
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
-//            LinearGradient(
-//                gradient: Gradient(colors: [.brand, .black]),
-//                startPoint: .topLeading,
-//                endPoint: .bottomTrailing
-//            )
         }
     }
 }

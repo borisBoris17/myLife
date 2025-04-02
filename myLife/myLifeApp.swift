@@ -18,8 +18,6 @@ struct myLifeApp: App {
         }
         
         let config = ModelConfiguration(
-//            schema: Schema([Memory.self, Gratitude.self, Person.self, User.self]),
-//            url: sharedURL,
             cloudKitDatabase: .automatic
         )
         

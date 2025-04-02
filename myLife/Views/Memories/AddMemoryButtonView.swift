@@ -19,7 +19,6 @@ struct AddMemoryButtonView: View {
                         Circle()
                             .foregroundColor(Color.brand)
                             .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 5)
-                        
                     )
             }
         }

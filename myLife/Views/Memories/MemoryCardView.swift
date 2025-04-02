@@ -15,7 +15,45 @@ struct MemoryCardView: View {
     
     var body: some View {
         VStack {
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                
+                if let imageData = memory.imageData, let uiImage = UIImage(data: imageData) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(memory.title)
+                                .font(.headline)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text(memory.date.formatted(date: .numeric, time: .omitted))
+                                .font(.caption)
+                                .padding(.bottom, 5)
+                            
+                            Text(memory.memoryText)
+                                .multilineTextAlignment(.leading)
+                            
+                            HStack {
+                                WrappingHStack(alignment: .leading) {
+                                    ForEach (memory.unwrappedPeople) { person in
+                                        Text(person.name)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 8)
+                                            .background(Color.background)
+                                            .foregroundColor(.brand)
+                                            .cornerRadius(8)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            )
+                            .scaledToFit()
+                            .frame(width: geometry.size.width * 0.35, height: geometry.size.width * 0.35)
+                    }
+                } else {
                     HStack {
                         Text(memory.title)
                             .font(.headline)
@@ -42,23 +80,11 @@ struct MemoryCardView: View {
                         }
                         
                         Spacer()
-                        
-                        
-                        if let imageData = memory.imageData, let uiImage = UIImage(data: imageData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .frame(width: geometry.size.width * 0.15, height: geometry.size.width * 0.15)
-                                .clipShape(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                )
-                                .scaledToFit()
-                        }
                     }
-                    
-                    
                 }
-                .padding()
             }
+            .padding()
+        }
         .foregroundStyle(Color.textOnBrand)
         .background(
             RoundedRectangle(cornerRadius: 10, style: .continuous)

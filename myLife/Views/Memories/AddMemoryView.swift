@@ -183,6 +183,7 @@ struct AddMemoryView: View {
         let newMemory = Memory(date: memoryDate, title: memoryTitle, memoryText: memoryText, people: Array(selectedPeople), imageData: imageData, mood: selectedMood)
         modelContext.insert(newMemory) // Insert into SwiftData model context
         try? modelContext.save() // Save changes
+        MemoryExporter.saveToFile(newMemory)
         animateStreak = true
         
         // Reset animation after short delay

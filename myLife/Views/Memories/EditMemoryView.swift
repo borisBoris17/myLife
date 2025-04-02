@@ -193,6 +193,7 @@ struct EditMemoryView: View {
         memory.people = Array(selectedPeople)
         memory.imageData = imageData
         try? modelContext.save() // Save changes
+        MemoryExporter.updateMemory(memory)
     }
 }
 

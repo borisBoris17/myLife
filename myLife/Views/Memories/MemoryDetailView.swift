@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct MemoryDetailView: View {
     var memory: Memory
@@ -22,6 +23,7 @@ struct MemoryDetailView: View {
         modelContext.delete(memory)
         
         try? modelContext.save()
+        MemoryExporter.deleteMemory(withId: memory.id)
     }
     
     var body: some View {
@@ -82,6 +84,21 @@ struct MemoryDetailView: View {
                 Text(memory.memoryText)
                     .foregroundStyle(.brand.opacity(0.75))
                     .padding(.top)
+                
+                HStack {
+                    WrappingHStack(alignment: .leading) {
+                        ForEach (memory.unwrappedPeople) { person in
+                            Text(person.name)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(Color.background)
+                                .foregroundColor(.brand)
+                                .cornerRadius(8)
+                        }
+                    }
+                    
+                    Spacer()
+                }
                 
                 Spacer()
             }

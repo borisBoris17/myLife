@@ -201,7 +201,6 @@ struct MemoriesView: View {
             if allMemories.count > 0 {
                 MemoryExporter.exportIfNeeded(context: modelContext)
             }
-            
         }
     }
 }
