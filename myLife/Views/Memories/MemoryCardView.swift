@@ -45,13 +45,17 @@ struct MemoryCardView: View {
                             }
                         }
                         
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .clipShape(
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            )
-                            .scaledToFit()
-                            .frame(width: geometry.size.width * 0.35, height: geometry.size.width * 0.35)
+                        VStack {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                )
+                                .scaledToFit()
+                                .frame(width: geometry.size.width * 0.35)
+                            
+                            Spacer()
+                        }
                     }
                 } else {
                     HStack {

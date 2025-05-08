@@ -42,10 +42,10 @@ struct MemoryDetailView: View {
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(width: geometry.size.width * 0.8)
                         .clipShape(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                         )
+                        .frame(width: geometry.size.width * 0.8)
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)

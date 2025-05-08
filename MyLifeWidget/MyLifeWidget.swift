@@ -31,7 +31,7 @@ struct RandomMemoryProvider: AppIntentTimelineProvider {
         if let result = try? await configuration.perform(), let memory = result.value {
             print(memory)
             let entry = MemoryEntry(date: Date(), memory: memory)
-            let nextUpdate = Calendar.current.date(byAdding: .second, value: 5, to: Date())!
+            let nextUpdate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
             let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
             return timeline
         } else {

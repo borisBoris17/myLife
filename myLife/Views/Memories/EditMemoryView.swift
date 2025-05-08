@@ -104,8 +104,10 @@ struct EditMemoryView: View {
                                 ZStack {
                                     Text(memoryMood?.name ?? "")
                                         .font(.headline)
-                                        
-                                    Text("Spacer Text").font(.headline).opacity(0)
+                                    
+                                    if memoryMood == nil {
+                                        Text("Spacer Text").font(.headline).opacity(0)
+                                    }
                                 }
                                 
                                 Spacer()
