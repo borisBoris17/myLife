@@ -199,6 +199,13 @@ struct MemoriesView: View {
         }
         .onAppear() {
             if allMemories.count > 0 {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                    if granted {
+                        print("✅ Notifications authorized")
+                    } else {
+                        print("🚫 Notifications not allowed")
+                    }
+                }
                 MemoryExporter.exportIfNeeded(context: modelContext)
             }
         }

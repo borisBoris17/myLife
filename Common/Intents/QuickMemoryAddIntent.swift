@@ -32,6 +32,7 @@ struct QuickMemoryIntent: AppIntent {
             
             // Save the context to persist data
             try modelContext.save()
+            scheduleDetailReminderNotification()
             
             return .result(dialog: "Memory Added: \(text)")
         } catch {

@@ -71,6 +71,7 @@
 				"Date+Extension.swift",
 				MemoryExporter.swift,
 				MoodEnum.swift,
+				NotificationUtility.swift,
 				SharedStorage.swift,
 			);
 			target = E647DC212D8FC2E8005971ED /* MyLifeWidgetExtension */;

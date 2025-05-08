@@ -143,7 +143,17 @@ struct EditMemoryView: View {
                             .frame(minHeight: 100) // Give the editor enough space
                     }
                     
-                    Section {
+                    Section(header: Text("Image"), footer:
+                                HStack {
+                        Spacer()
+                        
+                        Button("Remove") {
+                            imageData = nil
+                            photoItem = nil
+                            image = nil
+                        }
+                        .disabled(image == nil)
+                    }) {
                         ImagePickerView(photoItem: $photoItem, selectedImageData: $imageData, imageSize: geometry.size.width * 0.15)
                             .onChange(of: imageData) {
                                 updateImage()
